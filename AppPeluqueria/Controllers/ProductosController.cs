@@ -22,6 +22,14 @@ namespace AppPeluqueria.Controllers
             var productos = db.Productos.Include(c => c.Casa_Comerc);
             var modelos = Mapper.Map<IEnumerable<Productos>, IEnumerable<InfoProducto>>(productos);
 
+            //var prod = new Productos ();
+            //var resprod = new Res_Prod();
+
+            //if (!prod.cantidad.ToString().Equals(resprod.cantidad_Reservada.ToString()))
+            //{
+            //    prod.cantidad = resprod.cantidad_Reservada;
+            //}
+
             return View(modelos);
         }
 
