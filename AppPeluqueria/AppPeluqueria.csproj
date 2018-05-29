@@ -276,10 +276,13 @@
     <Content Include="Content\css\carousel.css" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Content\img\bienvenido.jpg" />
+    <Content Include="Content\img\champu.jpg" />
+    <Content Include="Content\img\espuma.jpg" />
     <Content Include="Content\img\imagenInicio.jpg" />
     <Content Include="Content\img\imagenInicio2.jpg" />
     <Content Include="Content\img\imagenInicio3.jpg" />
     <Content Include="Content\img\imagenInicio4.jpg" />
+    <Content Include="Content\img\keratina.jpg" />
     <Content Include="Content\img\llave.png" />
     <Content Include="Content\img\logo3.jpg" />
     <Content Include="Content\js\bootstrap.js" />
