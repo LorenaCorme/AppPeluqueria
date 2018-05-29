@@ -1,0 +1,44 @@
+﻿@helper img_link(System.Web.Mvc.UrlHelper url, string archivo, string controlador, string accion)
+    {
+
+        string imagen = url.Content("~/Content/img/" + archivo);
+        @: <a href="@url.Action(@accion,@controlador)">  <img alt="" src="@imagen" /> </a>
+}
+
+@helper tag_link(System.Web.Mvc.UrlHelper url, string titulo, string controlador, string accion)
+    {
+        @: <a href="@url.Action(@accion,@controlador)"> @titulo </a>
+}
+
+@helper img(System.Web.Mvc.UrlHelper url, string archivo)
+    {
+
+        string imagen = url.Content("~/Content/img/" + archivo);
+        @: <img alt="" src="@imagen" />
+}
+
+@helper imgInicio(System.Web.Mvc.UrlHelper url, string archivo)
+    {
+
+        string imagen = url.Content("~/Content/img/" + archivo);
+        @: <img alt="" src="@imagen" />
+}
+
+@helper imgBienvenido(System.Web.Mvc.UrlHelper url, string archivo)
+    {
+
+        string imagen = url.Content("~/Content/img/" + archivo);
+        @: <img alt="" src="@imagen" />
+}
+
+@helper btn_link(System.Web.Mvc.UrlHelper url, string titulo, string controlador, string accion)
+    {
+
+        @: <input type="button" value="@titulo" onclick="location.href='@url.Action(accion, @controlador)'" />
+}
+
+@helper btn_link_id(System.Web.Mvc.UrlHelper url, string titulo, string controlador, string accion, object obj)
+    {
+
+        @: <input type="button" value="@titulo" onclick="location.href='@url.Action(@accion, @controlador, @obj)'" />
+}

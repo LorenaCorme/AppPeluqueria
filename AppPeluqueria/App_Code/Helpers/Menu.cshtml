@@ -1,0 +1,21 @@
+﻿@helper MenuCabecera(System.Web.Mvc.UrlHelper url)
+    {
+
+        @:
+<ul id="cabecera_menu_items">
+    <li>
+        <h6> <a href="@url.Action("Index", "Home")"> Inicio </a></h6>
+    </li>
+    <li>
+        <h6> <a href="@url.Action("Bienvenido", "Home")"> Bienvenido </a></h6>
+    </li>
+
+</ul>
+
+}
+
+@helper MenuTodos(System.Web.Mvc.UrlHelper url)
+    {
+        <a href="@url.Action("Salir","Home")"> Salir </a>
+
+}

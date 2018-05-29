@@ -1,0 +1,34 @@
+﻿@model AppPeluqueria.Models.BD.Casa_Comerc
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Casa_Comerc</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.nombre_Casa)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nombre_Casa)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.local_Casa)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.local_Casa)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.id_Casa }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

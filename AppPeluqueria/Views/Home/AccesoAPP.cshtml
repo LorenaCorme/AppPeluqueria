@@ -1,0 +1,26 @@
+﻿@model AppPeluqueria.Models.LoginModel
+
+<h4> @Helpers.ImagenInicio.img(Url, "llave.png") Acceder al Sistema </h4>
+
+@using (Html.BeginForm())
+{
+    <fieldset>
+        <h5 class="msg_error">
+            @Html.ValidationSummary()
+            @ViewBag.Errores
+        </h5>
+
+        <pre>
+        Usuario:    @Html.TextBoxFor(user => user.usuario)
+        <br>
+
+
+
+        Contraseña: @Html.PasswordFor(user => user.contraseña)
+</pre>
+    </fieldset>
+
+    <p>
+        <input type="submit" value="Ingresar" />
+    </p>
+}

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="6a904388cb2d47ccbfbaa3780309c834" Name="Diagram1">
+        <EntityTypeShape EntityType="BDPeluqueriaModel.Casa_Comerc" Width="1.5" PointX="3" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDPeluqueriaModel.Clientes" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDPeluqueriaModel.Peluqueros" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDPeluqueriaModel.Productos" Width="1.5" PointX="5.25" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDPeluqueriaModel.Res_Prod" Width="1.5" PointX="7.5" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDPeluqueriaModel.Reservas" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDPeluqueriaModel.sysdiagrams" Width="1.5" PointX="7.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDPeluqueriaModel.Usuarios" Width="1.5" PointX="7.75" PointY="7.75" IsExpanded="true" />
+        <AssociationConnector Association="BDPeluqueriaModel.FK__Productos__id_Ca__12FDD1B2" ManuallyRouted="false" />
+        <AssociationConnector Association="BDPeluqueriaModel.FK__Clientes__dni_Pe__0A688BB1" ManuallyRouted="false" />
+        <AssociationConnector Association="BDPeluqueriaModel.FK__Reservas__dni_Cl__0D44F85C" ManuallyRouted="false" />
+        <AssociationConnector Association="BDPeluqueriaModel.FK__Reservas__dni_Pe__0E391C95" ManuallyRouted="false" />
+        <AssociationConnector Association="BDPeluqueriaModel.FK__Res_Prod__id_Pro__4959E263" ManuallyRouted="false" />
+        <AssociationConnector Association="BDPeluqueriaModel.FK__Res_Prod__num_Re__4865BE2A" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

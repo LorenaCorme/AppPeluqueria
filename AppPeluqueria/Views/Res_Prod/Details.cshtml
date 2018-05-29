@@ -1,0 +1,50 @@
+﻿@model AppPeluqueria.Models.BD.Res_Prod
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Res_Prod</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.cantidad_Reservada)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.cantidad_Reservada)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.fecha_Reserva)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.fecha_Reserva)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Productos.nombre_Prod)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Productos.nombre_Prod)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Reservas.dni_Cli)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Reservas.dni_Cli)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

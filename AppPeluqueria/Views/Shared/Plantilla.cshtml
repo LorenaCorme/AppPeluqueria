@@ -1,0 +1,59 @@
+﻿
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <title> App Peluquería </title>
+</head>
+
+<body>
+
+    <div class="container">
+        <div id="cabecera" class="span-24">
+
+            <div class="span-2">
+                <div id="cabecera_logo">
+                    @Helpers.ImagenInicio.img(Url, "logo3.jpg")
+
+                    <a href="@Url.Action("Index","Home", new { area = "" })">
+                        <span class="logo" style="font-size:25px; color:tomato"> <b> <u>A</u>PP <u>P</u>eluquería </b> </span>
+                    </a>
+                </div>
+            </div>
+            <div class="span-10">
+
+            </div>
+            <div class="span-6 last">
+                <div id="cabecera_menu">
+                    @Helpers.Menu.MenuCabecera(Url)
+                </div>
+            </div>
+        </div>
+
+        <div id="centro" class="span-24 last">
+            <div class="span-5">
+                <div id="centro-izquierda">
+
+                </div>
+            </div>
+            <div class="span-19 last">
+                <div id="centro-contenido">
+                    @RenderBody()
+                </div>
+            </div>
+        </div>
+        <div id="pie" class="span-24 last">
+
+        </div>
+
+    </div>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

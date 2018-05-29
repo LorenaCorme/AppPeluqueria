@@ -1,0 +1,492 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="BDPeluqueriaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Casa_Comerc">
+          <Key>
+            <PropertyRef Name="id_Casa" />
+          </Key>
+          <Property Name="id_Casa" Type="char" MaxLength="4" Nullable="false" />
+          <Property Name="nombre_Casa" Type="char" MaxLength="30" Nullable="false" />
+          <Property Name="local_Casa" Type="char" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Clientes">
+          <Key>
+            <PropertyRef Name="dni_Cli" />
+          </Key>
+          <Property Name="dni_Cli" Type="char" MaxLength="9" Nullable="false" />
+          <Property Name="nombre_Cli" Type="char" MaxLength="30" Nullable="false" />
+          <Property Name="apell_Cli" Type="char" MaxLength="50" Nullable="false" />
+          <Property Name="dir_Cli" Type="char" MaxLength="30" Nullable="false" />
+          <Property Name="dni_Pel" Type="char" MaxLength="9" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Peluqueros">
+          <Key>
+            <PropertyRef Name="dni_Pel" />
+          </Key>
+          <Property Name="dni_Pel" Type="char" MaxLength="9" Nullable="false" />
+          <Property Name="nombre_Pel" Type="char" MaxLength="30" Nullable="false" />
+          <Property Name="apell_Pel" Type="char" MaxLength="50" Nullable="false" />
+          <Property Name="dir_Pel" Type="char" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Productos">
+          <Key>
+            <PropertyRef Name="id_Prod" />
+          </Key>
+          <Property Name="id_Prod" Type="char" MaxLength="4" Nullable="false" />
+          <Property Name="nombre_Prod" Type="char" MaxLength="30" Nullable="false" />
+          <Property Name="cantidad" Type="char" MaxLength="4" Nullable="false" />
+          <Property Name="id_Casa" Type="char" MaxLength="4" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Res_Prod">
+          <Key>
+            <PropertyRef Name="num_Res" />
+            <PropertyRef Name="id_Prod" />
+          </Key>
+          <Property Name="num_Res" Type="char" MaxLength="4" Nullable="false" />
+          <Property Name="id_Prod" Type="char" MaxLength="4" Nullable="false" />
+          <Property Name="cantidad_Reservada" Type="char" MaxLength="4" Nullable="false" />
+          <Property Name="fecha_Reserva" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Reservas">
+          <Key>
+            <PropertyRef Name="num_Res" />
+          </Key>
+          <Property Name="num_Res" Type="char" MaxLength="4" Nullable="false" />
+          <Property Name="dni_Cli" Type="char" MaxLength="9" Nullable="false" />
+          <Property Name="dni_Pel" Type="char" MaxLength="9" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Usuarios">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="bigint" Nullable="false" />
+          <Property Name="usuario" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="contraseña" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="correo" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__Clientes__dni_Pe__0A688BB1">
+          <End Role="Peluqueros" Type="Self.Peluqueros" Multiplicity="1" />
+          <End Role="Clientes" Type="Self.Clientes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Peluqueros">
+              <PropertyRef Name="dni_Pel" />
+            </Principal>
+            <Dependent Role="Clientes">
+              <PropertyRef Name="dni_Pel" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Productos__id_Ca__12FDD1B2">
+          <End Role="Casa_Comerc" Type="Self.Casa_Comerc" Multiplicity="1" />
+          <End Role="Productos" Type="Self.Productos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Casa_Comerc">
+              <PropertyRef Name="id_Casa" />
+            </Principal>
+            <Dependent Role="Productos">
+              <PropertyRef Name="id_Casa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Res_Prod__id_Pro__4959E263">
+          <End Role="Productos" Type="Self.Productos" Multiplicity="1" />
+          <End Role="Res_Prod" Type="Self.Res_Prod" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Productos">
+              <PropertyRef Name="id_Prod" />
+            </Principal>
+            <Dependent Role="Res_Prod">
+              <PropertyRef Name="id_Prod" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Res_Prod__num_Re__4865BE2A">
+          <End Role="Reservas" Type="Self.Reservas" Multiplicity="1" />
+          <End Role="Res_Prod" Type="Self.Res_Prod" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Reservas">
+              <PropertyRef Name="num_Res" />
+            </Principal>
+            <Dependent Role="Res_Prod">
+              <PropertyRef Name="num_Res" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Reservas__dni_Cl__0D44F85C">
+          <End Role="Clientes" Type="Self.Clientes" Multiplicity="1" />
+          <End Role="Reservas" Type="Self.Reservas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clientes">
+              <PropertyRef Name="dni_Cli" />
+            </Principal>
+            <Dependent Role="Reservas">
+              <PropertyRef Name="dni_Cli" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Reservas__dni_Pe__0E391C95">
+          <End Role="Peluqueros" Type="Self.Peluqueros" Multiplicity="1" />
+          <End Role="Reservas" Type="Self.Reservas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Peluqueros">
+              <PropertyRef Name="dni_Pel" />
+            </Principal>
+            <Dependent Role="Reservas">
+              <PropertyRef Name="dni_Pel" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="BDPeluqueriaModelStoreContainer">
+          <EntitySet Name="Casa_Comerc" EntityType="Self.Casa_Comerc" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Clientes" EntityType="Self.Clientes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Peluqueros" EntityType="Self.Peluqueros" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Productos" EntityType="Self.Productos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Res_Prod" EntityType="Self.Res_Prod" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Reservas" EntityType="Self.Reservas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Usuarios" EntityType="Self.Usuarios" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Clientes__dni_Pe__0A688BB1" Association="Self.FK__Clientes__dni_Pe__0A688BB1">
+            <End Role="Peluqueros" EntitySet="Peluqueros" />
+            <End Role="Clientes" EntitySet="Clientes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Productos__id_Ca__12FDD1B2" Association="Self.FK__Productos__id_Ca__12FDD1B2">
+            <End Role="Casa_Comerc" EntitySet="Casa_Comerc" />
+            <End Role="Productos" EntitySet="Productos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Res_Prod__id_Pro__4959E263" Association="Self.FK__Res_Prod__id_Pro__4959E263">
+            <End Role="Productos" EntitySet="Productos" />
+            <End Role="Res_Prod" EntitySet="Res_Prod" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Res_Prod__num_Re__4865BE2A" Association="Self.FK__Res_Prod__num_Re__4865BE2A">
+            <End Role="Reservas" EntitySet="Reservas" />
+            <End Role="Res_Prod" EntitySet="Res_Prod" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Reservas__dni_Cl__0D44F85C" Association="Self.FK__Reservas__dni_Cl__0D44F85C">
+            <End Role="Clientes" EntitySet="Clientes" />
+            <End Role="Reservas" EntitySet="Reservas" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Reservas__dni_Pe__0E391C95" Association="Self.FK__Reservas__dni_Pe__0E391C95">
+            <End Role="Peluqueros" EntitySet="Peluqueros" />
+            <End Role="Reservas" EntitySet="Reservas" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="BDPeluqueriaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Casa_Comerc">
+          <Key>
+            <PropertyRef Name="id_Casa" />
+          </Key>
+          <Property Name="id_Casa" Type="String" MaxLength="4" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="nombre_Casa" Type="String" MaxLength="30" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="local_Casa" Type="String" MaxLength="30" FixedLength="true" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Productos" Relationship="Self.FK__Productos__id_Ca__12FDD1B2" FromRole="Casa_Comerc" ToRole="Productos" />
+        </EntityType>
+        <EntityType Name="Clientes">
+          <Key>
+            <PropertyRef Name="dni_Cli" />
+          </Key>
+          <Property Name="dni_Cli" Type="String" MaxLength="9" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="nombre_Cli" Type="String" MaxLength="30" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="apell_Cli" Type="String" MaxLength="50" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="dir_Cli" Type="String" MaxLength="30" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="dni_Pel" Type="String" MaxLength="9" FixedLength="true" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Peluqueros" Relationship="Self.FK__Clientes__dni_Pe__0A688BB1" FromRole="Clientes" ToRole="Peluqueros" />
+          <NavigationProperty Name="Reservas" Relationship="Self.FK__Reservas__dni_Cl__0D44F85C" FromRole="Clientes" ToRole="Reservas" />
+        </EntityType>
+        <EntityType Name="Peluqueros">
+          <Key>
+            <PropertyRef Name="dni_Pel" />
+          </Key>
+          <Property Name="dni_Pel" Type="String" MaxLength="9" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="nombre_Pel" Type="String" MaxLength="30" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="apell_Pel" Type="String" MaxLength="50" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="dir_Pel" Type="String" MaxLength="30" FixedLength="true" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Clientes" Relationship="Self.FK__Clientes__dni_Pe__0A688BB1" FromRole="Peluqueros" ToRole="Clientes" />
+          <NavigationProperty Name="Reservas" Relationship="Self.FK__Reservas__dni_Pe__0E391C95" FromRole="Peluqueros" ToRole="Reservas" />
+        </EntityType>
+        <EntityType Name="Productos">
+          <Key>
+            <PropertyRef Name="id_Prod" />
+          </Key>
+          <Property Name="id_Prod" Type="String" MaxLength="4" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="nombre_Prod" Type="String" MaxLength="30" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="cantidad" Type="String" MaxLength="4" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="id_Casa" Type="String" MaxLength="4" FixedLength="true" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Casa_Comerc" Relationship="Self.FK__Productos__id_Ca__12FDD1B2" FromRole="Productos" ToRole="Casa_Comerc" />
+          <NavigationProperty Name="Res_Prod" Relationship="Self.FK__Res_Prod__id_Pro__4959E263" FromRole="Productos" ToRole="Res_Prod" />
+        </EntityType>
+        <EntityType Name="Res_Prod">
+          <Key>
+            <PropertyRef Name="num_Res" />
+            <PropertyRef Name="id_Prod" />
+          </Key>
+          <Property Name="num_Res" Type="String" MaxLength="4" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="id_Prod" Type="String" MaxLength="4" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="cantidad_Reservada" Type="String" MaxLength="4" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="fecha_Reserva" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="Productos" Relationship="Self.FK__Res_Prod__id_Pro__4959E263" FromRole="Res_Prod" ToRole="Productos" />
+          <NavigationProperty Name="Reservas" Relationship="Self.FK__Res_Prod__num_Re__4865BE2A" FromRole="Res_Prod" ToRole="Reservas" />
+        </EntityType>
+        <EntityType Name="Reservas">
+          <Key>
+            <PropertyRef Name="num_Res" />
+          </Key>
+          <Property Name="num_Res" Type="String" MaxLength="4" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="dni_Cli" Type="String" MaxLength="9" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="dni_Pel" Type="String" MaxLength="9" FixedLength="true" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Clientes" Relationship="Self.FK__Reservas__dni_Cl__0D44F85C" FromRole="Reservas" ToRole="Clientes" />
+          <NavigationProperty Name="Peluqueros" Relationship="Self.FK__Reservas__dni_Pe__0E391C95" FromRole="Reservas" ToRole="Peluqueros" />
+          <NavigationProperty Name="Res_Prod" Relationship="Self.FK__Res_Prod__num_Re__4865BE2A" FromRole="Reservas" ToRole="Res_Prod" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Usuarios">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" />
+          <Property Name="usuario" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="contraseña" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="correo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__Productos__id_Ca__12FDD1B2">
+          <End Role="Casa_Comerc" Type="Self.Casa_Comerc" Multiplicity="1" />
+          <End Role="Productos" Type="Self.Productos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Casa_Comerc">
+              <PropertyRef Name="id_Casa" />
+            </Principal>
+            <Dependent Role="Productos">
+              <PropertyRef Name="id_Casa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Clientes__dni_Pe__0A688BB1">
+          <End Role="Peluqueros" Type="Self.Peluqueros" Multiplicity="1" />
+          <End Role="Clientes" Type="Self.Clientes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Peluqueros">
+              <PropertyRef Name="dni_Pel" />
+            </Principal>
+            <Dependent Role="Clientes">
+              <PropertyRef Name="dni_Pel" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Reservas__dni_Cl__0D44F85C">
+          <End Role="Clientes" Type="Self.Clientes" Multiplicity="1" />
+          <End Role="Reservas" Type="Self.Reservas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clientes">
+              <PropertyRef Name="dni_Cli" />
+            </Principal>
+            <Dependent Role="Reservas">
+              <PropertyRef Name="dni_Cli" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Reservas__dni_Pe__0E391C95">
+          <End Role="Peluqueros" Type="Self.Peluqueros" Multiplicity="1" />
+          <End Role="Reservas" Type="Self.Reservas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Peluqueros">
+              <PropertyRef Name="dni_Pel" />
+            </Principal>
+            <Dependent Role="Reservas">
+              <PropertyRef Name="dni_Pel" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Res_Prod__id_Pro__4959E263">
+          <End Role="Productos" Type="Self.Productos" Multiplicity="1" />
+          <End Role="Res_Prod" Type="Self.Res_Prod" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Productos">
+              <PropertyRef Name="id_Prod" />
+            </Principal>
+            <Dependent Role="Res_Prod">
+              <PropertyRef Name="id_Prod" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Res_Prod__num_Re__4865BE2A">
+          <End Role="Reservas" Type="Self.Reservas" Multiplicity="1" />
+          <End Role="Res_Prod" Type="Self.Res_Prod" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Reservas">
+              <PropertyRef Name="num_Res" />
+            </Principal>
+            <Dependent Role="Res_Prod">
+              <PropertyRef Name="num_Res" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="BDPeluqueriaEntities2" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Casa_Comerc" EntityType="Self.Casa_Comerc" />
+          <EntitySet Name="Clientes" EntityType="Self.Clientes" />
+          <EntitySet Name="Peluqueros" EntityType="Self.Peluqueros" />
+          <EntitySet Name="Productos" EntityType="Self.Productos" />
+          <EntitySet Name="Res_Prod" EntityType="Self.Res_Prod" />
+          <EntitySet Name="Reservas" EntityType="Self.Reservas" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="Usuarios" EntityType="Self.Usuarios" />
+          <AssociationSet Name="FK__Productos__id_Ca__12FDD1B2" Association="Self.FK__Productos__id_Ca__12FDD1B2">
+            <End Role="Casa_Comerc" EntitySet="Casa_Comerc" />
+            <End Role="Productos" EntitySet="Productos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Clientes__dni_Pe__0A688BB1" Association="Self.FK__Clientes__dni_Pe__0A688BB1">
+            <End Role="Peluqueros" EntitySet="Peluqueros" />
+            <End Role="Clientes" EntitySet="Clientes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Reservas__dni_Cl__0D44F85C" Association="Self.FK__Reservas__dni_Cl__0D44F85C">
+            <End Role="Clientes" EntitySet="Clientes" />
+            <End Role="Reservas" EntitySet="Reservas" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Reservas__dni_Pe__0E391C95" Association="Self.FK__Reservas__dni_Pe__0E391C95">
+            <End Role="Peluqueros" EntitySet="Peluqueros" />
+            <End Role="Reservas" EntitySet="Reservas" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Res_Prod__id_Pro__4959E263" Association="Self.FK__Res_Prod__id_Pro__4959E263">
+            <End Role="Productos" EntitySet="Productos" />
+            <End Role="Res_Prod" EntitySet="Res_Prod" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Res_Prod__num_Re__4865BE2A" Association="Self.FK__Res_Prod__num_Re__4865BE2A">
+            <End Role="Reservas" EntitySet="Reservas" />
+            <End Role="Res_Prod" EntitySet="Res_Prod" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="BDPeluqueriaModelStoreContainer" CdmEntityContainer="BDPeluqueriaEntities2">
+          <EntitySetMapping Name="Casa_Comerc">
+            <EntityTypeMapping TypeName="BDPeluqueriaModel.Casa_Comerc">
+              <MappingFragment StoreEntitySet="Casa_Comerc">
+                <ScalarProperty Name="id_Casa" ColumnName="id_Casa" />
+                <ScalarProperty Name="nombre_Casa" ColumnName="nombre_Casa" />
+                <ScalarProperty Name="local_Casa" ColumnName="local_Casa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Clientes">
+            <EntityTypeMapping TypeName="BDPeluqueriaModel.Clientes">
+              <MappingFragment StoreEntitySet="Clientes">
+                <ScalarProperty Name="dni_Cli" ColumnName="dni_Cli" />
+                <ScalarProperty Name="nombre_Cli" ColumnName="nombre_Cli" />
+                <ScalarProperty Name="apell_Cli" ColumnName="apell_Cli" />
+                <ScalarProperty Name="dir_Cli" ColumnName="dir_Cli" />
+                <ScalarProperty Name="dni_Pel" ColumnName="dni_Pel" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Peluqueros">
+            <EntityTypeMapping TypeName="BDPeluqueriaModel.Peluqueros">
+              <MappingFragment StoreEntitySet="Peluqueros">
+                <ScalarProperty Name="dni_Pel" ColumnName="dni_Pel" />
+                <ScalarProperty Name="nombre_Pel" ColumnName="nombre_Pel" />
+                <ScalarProperty Name="apell_Pel" ColumnName="apell_Pel" />
+                <ScalarProperty Name="dir_Pel" ColumnName="dir_Pel" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Productos">
+            <EntityTypeMapping TypeName="BDPeluqueriaModel.Productos">
+              <MappingFragment StoreEntitySet="Productos">
+                <ScalarProperty Name="id_Prod" ColumnName="id_Prod" />
+                <ScalarProperty Name="nombre_Prod" ColumnName="nombre_Prod" />
+                <ScalarProperty Name="cantidad" ColumnName="cantidad" />
+                <ScalarProperty Name="id_Casa" ColumnName="id_Casa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Res_Prod">
+            <EntityTypeMapping TypeName="BDPeluqueriaModel.Res_Prod">
+              <MappingFragment StoreEntitySet="Res_Prod">
+                <ScalarProperty Name="num_Res" ColumnName="num_Res" />
+                <ScalarProperty Name="id_Prod" ColumnName="id_Prod" />
+                <ScalarProperty Name="cantidad_Reservada" ColumnName="cantidad_Reservada" />
+                <ScalarProperty Name="fecha_Reserva" ColumnName="fecha_Reserva" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Reservas">
+            <EntityTypeMapping TypeName="BDPeluqueriaModel.Reservas">
+              <MappingFragment StoreEntitySet="Reservas">
+                <ScalarProperty Name="num_Res" ColumnName="num_Res" />
+                <ScalarProperty Name="dni_Cli" ColumnName="dni_Cli" />
+                <ScalarProperty Name="dni_Pel" ColumnName="dni_Pel" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="BDPeluqueriaModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Usuarios">
+            <EntityTypeMapping TypeName="BDPeluqueriaModel.Usuarios">
+              <MappingFragment StoreEntitySet="Usuarios">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="usuario" ColumnName="usuario" />
+                <ScalarProperty Name="contraseña" ColumnName="contraseña" />
+                <ScalarProperty Name="correo" ColumnName="correo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
